@@ -9,7 +9,7 @@ window.APP_DATA = [
   },
   {
     type: 'video',
-    src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+    src: 'https://github.com/hoangnamnion/ablumquansu/raw/refs/heads/main/img/1.2.mp4',
     poster: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200',
     title: 'Timelapse hoa nở',
     description: 'Một đoạn timelapse ngắn.'
