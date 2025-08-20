@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ablum Quân Sự 75DCKN24</title>
   <style>
-    :root{--maxw:1100px;--gap:16px;--radius:12px;--bg:#0d1117;--card:#161b22;--text:#e6edf3;--muted:#9da7b3;--accent:#58a6ff}
+    :root{
+      --maxw:1100px;--gap:16px;--radius:12px;
+      --bg:#0d1117;--card:#161b22;--text:#e6edf3;--muted:#9da7b3;--accent:#58a6ff;
+      /* Chiều cao khung cố định cho media */
+      --media-h: clamp(180px, 24vw, 260px);
+    }
     *{box-sizing:border-box}
     body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;margin:0;background:var(--bg);color:var(--text)}
     header{max-width:var(--maxw);padding:24px 16px;margin:auto}
@@ -22,10 +27,17 @@
       background:var(--card);
       border:1px solid rgba(0, 68, 255, 0.06);
       border-radius:var(--radius);
-      overflow:hidden;
+      overflow:hidden; /* chặn tràn ra ngoài */
       box-shadow:0 6px 16px rgba(0,0,0,.25);
     }
-    .media{display:block;width:100%;background:#000;aspect-ratio:16/9;object-fit:cover}
+    /* MEDIA LUÔN GỌN TRONG KHUNG */
+    .media{
+      display:block;
+      width:100%;
+      height:var(--media-h);   /* chiều cao cố định */
+      object-fit:cover;        /* cắt vừa khung */
+      background:#000;
+    }
     .body{padding:12px 14px}
     .title{font-weight:600;margin:0 0 6px 0}
     .desc{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
@@ -58,7 +70,6 @@
   <script src="data.js"></script>
   <script>
     (function(){
-      // Dữ liệu phải tồn tại ở window.APP_DATA (được định nghĩa trong data.js)
       const DATA = (Array.isArray(window.APP_DATA) ? window.APP_DATA : [])
         .filter(x => x && (x.type === 'image' || x.type === 'video'));
 
@@ -84,7 +95,6 @@
           if(item.poster) vid.poster = item.poster;
           const src = document.createElement('source');
           src.src = item.src;
-          // đoán mime theo đuôi
           const ext = (item.src.split('.').pop()||'').toLowerCase();
           src.type = (ext === 'mp4') ? 'video/mp4' : (ext === 'webm' ? 'video/webm' : '');
           vid.appendChild(src);
@@ -119,7 +129,6 @@
         list.forEach(item => grid.appendChild(makeCard(item)));
       }
 
-      // Buttons filter
       const btns = document.querySelectorAll('.toolbar .btn');
       btns.forEach(btn => {
         btn.addEventListener('click', () => {
